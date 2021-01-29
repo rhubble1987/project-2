@@ -2,7 +2,7 @@
 
 ## MVP:
 
-Users can pick movies they plan on watching and set a date and time they will watch a specific movie. From a movie's profile page, users can see dates and times when others are planning to watch the movie. Once that date and time occur, an instant chat conversation will be started and will allow users currently watching the movie to engage and discuss the movie.
+Users can create a viewing of a movie and each viewing creates an instant chat thread for users to engage and disucss the movie while watching it. 
 
 ## Potential features:
 * Users build their own watch lists
@@ -13,28 +13,33 @@ Users can pick movies they plan on watching and set a date and time they will wa
 ## HTML Routes
 
 Index page
-* Contains user's selected movies and date and time slots for selected movies
+* List of movies that can have a viewing
 
 Movie page
-* Contains the conversations for a movie and times when others are watching the movie
-* Could also contain additional movie info like ratings, reviews, etc.
+* List of created viewings and where a user can create a viewing
+
+Viewings page
+* Specific instance of a viewing for a movie
 
 ## Schema
 
-Movies Schema:
+Viewings
 * ID
-* IMDB id
+* OMDB Movie ID
+* Viewing date
+* Viewing time
+* Channel ID
 * Chat log
-* Number of users planning to watch
-* Viewing dates and timeslots - new timeslots every 4 hours
+* Number of viewers
 
-Users schema:
+Chats
 * ID
-* username
-* password
-* email
-* Movies they are planning to watch (movie ID)
-* User's chat log
+* Viewing ID
+* Created date and time
+* Chat content
+
+Viewings and Chats relationship is one to many, and deleting a viewing would cascade down to related chats.
+
 
 ## Third-party APIs
 * OMDB API to retrieve movie info
