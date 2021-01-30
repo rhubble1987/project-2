@@ -16,15 +16,20 @@ app.get("/", function(req,res) {
     });
 });
 
-app.get("/party/:id", function(req,res) {
-    db.ViewParty.findAll(function(data) {
-        
-    })
-})
+/* app.get("/party/:id", function(req,res) {
+    db.ViewParty.findByPk(req.params.id).then(function(data) {
+        const hbsObject = {
+            party: data
+        };
+        console.log(hbsObject)
+    }).then(function(db.ViewParty))
+}) */
 
 app.post("/api/parties", function (req,res) {
     db.ViewParty.create({
         OMDBId: req.body.OMDBId,
+        //Replace value with real socket id
+        socketId: 123,
         viewerNumber: req.body.viewerNumber,
         viewDay: req.body.viewDay,
         viewTime: req.body.viewTime
