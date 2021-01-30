@@ -1,1 +1,0 @@
-//Database calls with sequlize orm for movie object
