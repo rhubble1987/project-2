@@ -12,7 +12,6 @@ app.get("/", function(req,res) {
         };
         console.log(hbsObject);
         res.render('index',hbsObject);
-        res.json(hbsObject);
     });
 });
 
