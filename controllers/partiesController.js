@@ -1,8 +1,11 @@
 const db = require('../models');
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
 
 module.exports = function(app) {
 
-app.get("/api/parties", function(req,res) {
+//Loading index page will pull all saved view parties
+app.get("/", function(req,res) {
     db.ViewParty.findAll(function(data) {
         const hbsObject = {
             parties: data
@@ -12,6 +15,12 @@ app.get("/api/parties", function(req,res) {
         res.json(hbsObject);
     });
 });
+
+app.get("/party/:id", function(req,res) {
+    db.ViewParty.findAll(function(data) {
+        
+    })
+})
 
 app.post("/api/parties", function (req,res) {
     db.ViewParty.create({
