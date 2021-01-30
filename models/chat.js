@@ -3,18 +3,14 @@ module.exports = function(sequelize,DataTypes){
         body: {
             type: DataTypes.STRING,
             allowNull: false
-        },
-        timestamp: {
-            type: DataTypes.DATETIME,
-            defaultValue: Sequelize.NOW
         }
     });
 
-    Chat.associate = (models) =>{
-        Chat.hasOne(models.ViewParty,{
+    // Chat.associate = (models) =>{
+    //     Chat.belongsto(models.ViewParty,{
 
-        });
-    }
+    //     });
+    // }
 
     return Chat;
 

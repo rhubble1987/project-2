@@ -6,10 +6,6 @@ module.exports =function(sequelize, DataTypes){
             type: DataTypes.STRING,
             allowNull:false
         },
-        creationDate: {
-            type: Sequelize.DATEONLY,
-            allowNull:false
-        },
         viewerNumber: {
             type: DataTypes.INTEGER,
             allowNull:false
@@ -25,7 +21,7 @@ module.exports =function(sequelize, DataTypes){
     });
 
     ViewParty.associate= (models)=>{
-        ViewParty.hasMany(models.chat,{
+        ViewParty.hasMany(models.Chat,{
             onDelete: 'cascade'
         });
     };
