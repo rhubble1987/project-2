@@ -1,1 +1,0 @@
-//Database Callse with sequlize orm for user object
