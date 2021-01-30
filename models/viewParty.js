@@ -6,6 +6,10 @@ module.exports =function(sequelize, DataTypes){
             type: DataTypes.STRING,
             allowNull:false
         },
+        socketId: {
+            type: DataTypes.STRING,
+            allowNull:false
+        },
         viewerNumber: {
             type: DataTypes.INTEGER,
             allowNull:false
