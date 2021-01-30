@@ -11,11 +11,13 @@ app.get("/", function(req,res) {
             parties: data
         };
         console.log(hbsObject);
-        //res.render('index',hbsObject);
+        res.render('index',hbsObject);
         res.json(hbsObject);
     });
 });
 
+
+//Finalize the get individual party page route
 /* app.get("/party/:id", function(req,res) {
     db.ViewParty.findByPk(req.params.id).then(function(data) {
         const hbsObject = {
