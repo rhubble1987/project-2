@@ -33,7 +33,7 @@ io.on('connection', (socket) => {
   socket.on('disconnect', () => {
     console.log('user disconnected');
   });
-})
+});
 
 // Syncing our sequelize models and then starting our express app
 db.sequelize.sync({}).then(() => {
