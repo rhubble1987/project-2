@@ -1,12 +1,12 @@
 const express = require('express');
-const handlebars = require("express-handlebars");
+const handlebars = require('express-handlebars');
 
 // Sets up the Express App
 const app = express();
 
 //Allows io conenction
-const http = require("http").Server(app);
-const io = require("socket.io")(http);
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
 
 
 
@@ -20,16 +20,19 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 //Setup handlebars view engine
-app.engine("handlebars",handlebars({defaultLayout: "main"}));
-app.set("view engine", "handlebars");
+app.engine('handlebars',handlebars({defaultLayout: 'main'}));
+app.set('view engine', 'handlebars');
 
 //Connect Routes
-const router = require("./controllers/partiesController");
+const router = require('./controllers/partiesController');
 router(app);
 
 //On a user connection log message in console.
-io.on("connection", (socket) => {
-  console.log("A user connected");
+io.on('connection', (socket) => {
+  console.log('A user connected');
+  socket.on('disconnect', () => {
+    console.log('user disconnected');
+  });
 })
 
 // Syncing our sequelize models and then starting our express app
