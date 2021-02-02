@@ -24,13 +24,17 @@ app.get("/", function(req,res) {
         };
         console.log(hbsObject)
     }).then(function(db.ViewParty))
-}) */
-
+})
+ */
 app.post("/api/parties", function (req,res) {
+    let socketId;
+    io.on("connection", (socket) => {
+        console.log(socket.id);
+        socketId = socket.id;
+      });
     db.ViewParty.create({
         OMDBId: req.body.OMDBId,
-        //Replace value with real socket id
-        socketId: 123,
+        socketId: socketId,
         viewerNumber: req.body.viewerNumber,
         viewDay: req.body.viewDay,
         viewTime: req.body.viewTime
