@@ -28,7 +28,7 @@ app.set('view engine', 'handlebars');
 //Connect Routes
 const router = require('./controllers/partiesController');
 const { dirname } = require('path');
-router(app);
+router(app,io);
 
 //On a user connection log message in console.
 io.on('connection', (socket) => {
