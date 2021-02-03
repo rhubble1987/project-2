@@ -1,19 +1,16 @@
 const db = require('../models');
 
-module.exports = function(app) {
+module.exports = function(app,io) {
 
 //Loading index page will pull all saved view parties
 app.get("/", function(req,res) {
-    //TEMPORATYLY COMMENTED OUT
-    // db.ViewParty.findAll(function(data) {
-    //     const hbsObject = {
-    //         parties: data
-    //     };
-    //     console.log(hbsObject);
-    //     res.render('index',hbsObject);
-    // });
-
-    res.render("index",{});
+    db.ViewParty.findAll({}).then(function(data) {
+        const hbsObject = {
+            parties: data
+        };
+        console.log(hbsObject);
+        res.render('index',hbsObject);
+    });
 });
 
 
