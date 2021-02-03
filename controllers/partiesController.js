@@ -1,19 +1,16 @@
 const db = require('../models');
 
-module.exports = function(app) {
+module.exports = function(app,io) {
 
 //Loading index page will pull all saved view parties
 app.get("/", function(req,res) {
-    //TEMPORATYLY COMMENTED OUT
-    // db.ViewParty.findAll(function(data) {
-    //     const hbsObject = {
-    //         parties: data
-    //     };
-    //     console.log(hbsObject);
-    //     res.render('index',hbsObject);
-    // });
-
-    res.render("index",{});
+    db.ViewParty.findAll({}).then(function(data) {
+        const hbsObject = {
+            parties: data
+        };
+        console.log(hbsObject);
+        res.render('index',hbsObject);
+    });
 });
 
 
@@ -25,13 +22,17 @@ app.get("/", function(req,res) {
         };
         console.log(hbsObject)
     }).then(function(db.ViewParty))
-}) */
-
+})
+ */
 app.post("/api/parties", function (req,res) {
+    let socketId;
+    io.on("connection", (socket) => {
+        console.log(socket.id);
+        socketId = socket.id;
+      });
     db.ViewParty.create({
         OMDBId: req.body.OMDBId,
-        //Replace value with real socket id
-        socketId: 123,
+        socketId: socketId,
         viewerNumber: req.body.viewerNumber,
         viewDay: req.body.viewDay,
         viewTime: req.body.viewTime
