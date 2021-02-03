@@ -6,7 +6,7 @@ module.exports = function(app,io) {
 app.get("/", function(req,res) {
     db.ViewParty.findAll(function(err,data) {
         if (err) {
-            res.sendStatus(500);
+            throw err;
         }
         const hbsObject = {
             parties: data
@@ -41,7 +41,7 @@ app.post("/api/parties", function (req,res) {
         viewTime: req.body.viewTime
     }).then(function(err, dbViewParty) {
         if (err) {
-            throw new Error;
+            throw err;
         }
         res.json(dbViewParty);
     });
@@ -54,7 +54,7 @@ app.delete("/api/parties/:id", function(req,res) {
         }
     }).then(function(err, dbViewParty) {
         if (err) {
-            res.sendStatus(500);
+            throw err;
         }
         res.json(dbViewParty);
     });
@@ -71,7 +71,7 @@ app.put("/api/parties/:id", function (req,res) {
         }
     }).then(function(err, dbViewParty) {
         if (err) {
-            res.sendStatus(500);
+            throw err;
         }
         res.json(dbViewParty);
     });
