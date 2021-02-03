@@ -4,10 +4,23 @@ module.exports = function(app) {
     });
 
     app.get("/movie/:movieId", function(req,res){
-        res.render("movieDiscussion",{});
+        db.ViewParty.findAll({where: OMDBId}).then(function(data) {
+            const hbsObject = {
+                parties: data
+            };
+            console.log(hbsObject);
+            res.render("movieDiscussion",hbsObject);
+        });
     });
 
     app.get("/view/:viewId",function(req,res){
-        res.render("viewParty",{});
+        db.ViewParty.findByPk(req.params.id,{include:Chat}).then(function(data) {
+            const hbsObject = {
+                party: data
+            };
+            console.log(hbsObject)
+            res.render("viewParty",hbsObject);
     });
+});
+
 }
