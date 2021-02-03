@@ -1,8 +1,9 @@
 const db = require('../models');
-const http = require('http').Server(app);
-const io = require('socket.io')(http);
+
 
 module.exports = function(app) {
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
 
 //Loading index page will pull all saved view parties
 app.get("/", function(req,res) {
