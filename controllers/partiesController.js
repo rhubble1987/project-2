@@ -1,18 +1,19 @@
 const db = require('../models');
-const http = require('http').Server(app);
-const io = require('socket.io')(http);
 
 module.exports = function(app) {
 
 //Loading index page will pull all saved view parties
 app.get("/", function(req,res) {
-    db.ViewParty.findAll(function(data) {
-        const hbsObject = {
-            parties: data
-        };
-        console.log(hbsObject);
-        res.render('index',hbsObject);
-    });
+    //TEMPORATYLY COMMENTED OUT
+    // db.ViewParty.findAll(function(data) {
+    //     const hbsObject = {
+    //         parties: data
+    //     };
+    //     console.log(hbsObject);
+    //     res.render('index',hbsObject);
+    // });
+
+    res.render("index",{});
 });
 
 
