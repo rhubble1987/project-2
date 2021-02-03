@@ -25,9 +25,10 @@ app.get("/", function(req,res) {
 })
  */
 app.post("/api/parties", function (req,res) {
+  
     db.ViewParty.create({
         OMDBId: req.body.OMDBId,
-        socketId: req.body.socketId,
+        roomName: req.body.roomName,
         viewerNumber: req.body.viewerNumber,
         viewDay: req.body.viewDay,
         viewTime: req.body.viewTime
