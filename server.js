@@ -26,9 +26,10 @@ app.engine('handlebars',handlebars({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
 //Connect Routes
-const router = require('./controllers/partiesController');
-const { dirname } = require('path');
-router(app,io);
+const router = require('./controllers/api-routes');
+const htmlRouter = require('./controllers/html-routes');
+router(app);
+htmlRouter(app);
 
 //On a user connection log message in console.
 io.on('connection', (socket) => {
