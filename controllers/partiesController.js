@@ -7,7 +7,10 @@ const io = require('socket.io')(http);
 
 //Loading index page will pull all saved view parties
 app.get("/", function(req,res) {
-    db.ViewParty.findAll(function(data) {
+    db.ViewParty.findAll(function(err,data) {
+        if (err) {
+            res.sendStatus(500);
+        }
         const hbsObject = {
             parties: data
         };
@@ -39,7 +42,10 @@ app.post("/api/parties", function (req,res) {
         viewerNumber: req.body.viewerNumber,
         viewDay: req.body.viewDay,
         viewTime: req.body.viewTime
-    }).then(function(dbViewParty) {
+    }).then(function(err, dbViewParty) {
+        if (err) {
+            throw new Error;
+        }
         res.json(dbViewParty);
     });
 });
@@ -49,7 +55,10 @@ app.delete("/api/parties/:id", function(req,res) {
         where: {
             id: req.params.id
         }
-    }).then(function(dbViewParty) {
+    }).then(function(err, dbViewParty) {
+        if (err) {
+            res.sendStatus(500);
+        }
         res.json(dbViewParty);
     });
 });
@@ -63,7 +72,10 @@ app.put("/api/parties/:id", function (req,res) {
         where: {
             id: req.params.id
         }
-    }).then(function(dbViewParty) {
+    }).then(function(err, dbViewParty) {
+        if (err) {
+            res.sendStatus(500);
+        }
         res.json(dbViewParty);
     });
 });
