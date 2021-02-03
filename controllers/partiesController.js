@@ -1,6 +1,6 @@
 const db = require('../models');
 
-module.exports = function(app,io) {
+module.exports = function(app) {
 
 //Loading index page will pull all saved view parties
 app.get("/", function(req,res) {
@@ -25,14 +25,9 @@ app.get("/", function(req,res) {
 })
  */
 app.post("/api/parties", function (req,res) {
-    let socketId;
-    io.on("connection", (socket) => {
-        console.log(socket.id);
-        socketId = socket.id;
-      });
     db.ViewParty.create({
         OMDBId: req.body.OMDBId,
-        socketId: socketId,
+        socketId: req.body.socketId,
         viewerNumber: req.body.viewerNumber,
         viewDay: req.body.viewDay,
         viewTime: req.body.viewTime
