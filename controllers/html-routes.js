@@ -4,7 +4,7 @@ module.exports = function(app) {
     });
 
     app.get("/movie/:movieId", function(req,res){
-        db.ViewParty.findAll({where: OMDBId}).then(function(data) {
+        db.ViewParty.findAll({where: {OMDBId: req.params.OMDBId}}).then(function(data) {
             const hbsObject = {
                 parties: data
             };
