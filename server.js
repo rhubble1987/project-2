@@ -7,6 +7,7 @@ const app = express();
 //Allows io conenction
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
+const path =require("path");
 
 
 
@@ -19,7 +20,7 @@ const db = require('./models');
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use(express.static(__dirname+'public'));
+app.use(express.static(path.join(__dirname,'/public')));
 
 //Setup handlebars view engine
 app.engine('handlebars',handlebars({defaultLayout: 'main'}));
@@ -33,14 +34,17 @@ htmlRouter(app);
 
 //On a user connection log message in console.
 io.on('connection', (socket) => {
+  const room = socket.handshake.query.room;
   console.log('A user connected');
   socket.on('disconnect', () => {
     console.log('user disconnected');
   });
   socket.on('chat message', msg => {
     console.log(msg);
-    io.emit('chat message', msg);
+    io.to(room).emit('chat message', msg);
   });
+
+  socket.join(room);
 });
 
 // Syncing our sequelize models and then starting our express app
