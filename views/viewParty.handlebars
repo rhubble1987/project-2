@@ -1,0 +1,14 @@
+<ul id="messages">
+    {{#each party}}
+        {{#each chatlog}}
+            <li>{{this}}</li>
+        {{/each}}
+    {{/each}}
+
+</ul>
+<form id="form" action="">
+    <input id="input" autocomplete="off" /><button>Send</button>
+</form>
+<script src="/socket.io/socket.io.js"></script>
+
+<script src="/assets/viewPartyScript.js"></script>

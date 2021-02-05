@@ -1,35 +1,40 @@
 const db = require('../models');
 
-module.exports = function(app) {
-    app.get("/test", function(req,res){
-        res.render("test",{});
-    });
+module.exports = function (app) {
+    app.get("/", function (req, res) {
 
-    app.get("/movie/:movieId", function(req,res){
-        db.ViewParty.findAll({where: {OMDBId: req.params.movieId}}).then(function(data) {
+        res.render("index", {});
+
+    });
+    app.get("/movie/:movieId", function (req, res) {
+        db.ViewParty.findAll({ where: { OMDBId: req.params.movieId } }).then(function (data) {
             const hbsObject = {
-                OMDBId: req.params.movieId,
                 parties: data
             };
             console.log(hbsObject);
-            res.render("movieDiscussion",hbsObject);
-        }).catch(function(err) {
+            res.render("movieDiscussion", hbsObject);
+        }).catch(function (err) {
             const hbsObject = {
-                OMDBId: req.params.movieId,
                 parties: []
             };
-            res.render("movieDiscussion",hbsObject);
+            res.render("movieDiscussion", hbsObject);
         });
     });
 
-    app.get("/view/:viewId",function(req,res){
-        db.ViewParty.findByPk(req.params.id,{include:Chat}).then(function(data) {
+    app.get("/view/:viewId", function (req, res) {
+        db.Chat.findAll({ where: { ViewPartyId: req.params.viewId } }).then(function (data) {
             const hbsObject = {
-                party: data
+                chats: data
             };
-            console.log(hbsObject)
-            res.render("viewParty",hbsObject);
+            console.log(data);
+            res.render("viewParty", hbsObject);
+        }).catch(function (err) {
+            const hbsObject = {
+                chats: []
+            };
+            console.log(data);
+            res.render("viewParty", hbsObject);
+        });
     });
-});
 
 }

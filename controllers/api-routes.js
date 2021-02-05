@@ -8,7 +8,7 @@ app.post("/api/parties", function (req,res) {
     db.ViewParty.create({
         OMDBId: req.body.OMDBId,
         roomName: req.body.roomName,
-        viewerNumber: req.body.viewerNumber,
+        viewerNumber: 0,
         viewDay: req.body.viewDay,
         viewTime: req.body.viewTime
     }).then(function(dbViewParty) {
