@@ -2,6 +2,7 @@ const db = require('../models');
 
 module.exports = function(app) {
 
+
 app.post("/api/parties", function (req,res) {
   
     db.ViewParty.create({
