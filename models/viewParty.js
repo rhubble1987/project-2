@@ -23,21 +23,21 @@ module.exports =function(sequelize, DataTypes){
                 contains:"-",
                 len:[7,11],
                 isValidYear(value) {
-                    let year = parseInt(value.split(":")[0]);
+                    let year = parseInt(value.split("-")[0]);
                     
                     if(year<2021||year>9999){
                         throw new Error("Year must have 4 digits and be in the future");
                     }
                 },
                 isValidDay(value){
-                    let day = parseInt(value.split(":")[2]);
+                    let day = parseInt(value.split("-")[2]);
                     
                     if(day<1||day>31){
                         throw new Error("Day must be between 1 and 31");
                     }
                 },
                 isValidMonth(value){
-                    let month = parseInt(value.split(":")[1]);
+                    let month = parseInt(value.split("-")[1]);
                     
                     if(month<0||month>12){
                         throw new Error("Month must be between 12 and 1");
