@@ -2,28 +2,6 @@ const db = require('../models');
 
 module.exports = function(app) {
 
-//Loading index page will pull all saved view parties
-app.get("/", function(req,res) {
-    db.ViewParty.findAll({}).then(function(data) {
-        const hbsObject = {
-            parties: data
-        };
-        console.log(hbsObject);
-        res.render('index',hbsObject);
-    });
-});
-
-
-//Finalize the get individual party page route
-/* app.get("/party/:id", function(req,res) {
-    db.ViewParty.findByPk(req.params.id).then(function(data) {
-        const hbsObject = {
-            party: data
-        };
-        console.log(hbsObject)
-    }).then(function(db.ViewParty))
-})
- */
 app.post("/api/parties", function (req,res) {
   
     db.ViewParty.create({
