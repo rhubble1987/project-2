@@ -8,9 +8,16 @@ module.exports = function(app) {
     app.get("/movie/:movieId", function(req,res){
         db.ViewParty.findAll({where: {OMDBId: req.params.movieId}}).then(function(data) {
             const hbsObject = {
+                OMDBId: req.params.movieId,
                 parties: data
             };
             console.log(hbsObject);
+            res.render("movieDiscussion",hbsObject);
+        }).catch(function(err) {
+            const hbsObject = {
+                OMDBId: req.params.movieId,
+                parties: []
+            };
             res.render("movieDiscussion",hbsObject);
         });
     });
