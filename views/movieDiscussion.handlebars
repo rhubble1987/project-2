@@ -88,12 +88,17 @@
 
 
     $(document).ready(function () {
-        $("#createParty").click(function () {
+        $("#partyCreate").on("click", function (event) {
             console.log("clicked the create viewing party button");
             $.ajax({
+                url: "/api/parties",
                 type: "POST",
                 data: {
-
+                    OMDBId: omdbId,
+                    roomName: $("#roomName").val().trim()
+                },
+                success: () => {
+                    console.log("success");
                 }
             })
         });
