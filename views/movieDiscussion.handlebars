@@ -91,7 +91,7 @@
     let key = "8e4b0c73";
     $.ajax({
         method: "GET",
-        url: "http://www.omdbapi.com/?i=" + omdbId + "&plot=short&r=json&" + "apikey=" + key,
+        url: "https://www.omdbapi.com/?i=" + omdbId + "&plot=short&r=json&" + "apikey=" + key,
         success: function (response) {
             console.log(response);
             $("#movie-info").append(`
