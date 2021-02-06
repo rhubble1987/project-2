@@ -16,8 +16,20 @@ form.addEventListener('submit', function (e) {
     e.preventDefault();
     if (input.value) {
         socket.emit('chat message', input.value);
+
+        $.ajax({
+            url: "/api/chats",
+            method:"POST",
+            data: {
+                message: input.value,
+                viewId: viewId
+            }
+        });
+
         input.value = '';
+       
     }
+
 });
 
 
@@ -27,3 +39,8 @@ socket.on('chat message', function (msg) {
     messages.appendChild(item);
     window.scrollTo(0, document.body.scrollHeight);
 });
+
+/**
+ * main
+ */
+

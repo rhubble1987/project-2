@@ -43,7 +43,8 @@ module.exports = function (app) {
     app.post("/api/chats", function (req, res) {
         db.Chat.create({
             author: null,
-            body: req.body.message
+            body: req.body.message,
+            ViewPartyId: req.body.viewId
         }).then(function (dbChat) {
             res.json(dbChat);
         });
