@@ -1,25 +1,19 @@
-var totalCalls = 15000;
-    var calls = 0;
-    data.forEach(function (d, i) {
-    OMDbApi(I, d.IdIMDb); //posterCall
-}
 
-function OMDbApi(index, id) {
+let omdbIds = ["tt3896198","tt2911666","tt0076759","tt1375666","tt0120338"];
+
+let key = "8e4b0c73";
+
+for (let i = 0; i < omdbIds.length; i++) {
+
     $.ajax({
-        url:"http://www.omdbapi.com/?i="+id+"&plot=short&r=json",
-        crossDomain: true,
-        dataType: "jsonp",
-                    dataObj : index,
+        method:"GET",
+        url: "http://www.omdbapi.com/?i=" + omdbIds[i] + "&plot=short&r=json&" + "apikey=" + key,
         success: function (response) {
-            window.data[this.dataObj].Poster = response.poster;
-                            calls++;
-                            if (calls == totalCalls)
-                            {
-                               alert("We're done");
-                            }
-        },
-        error: function(XMLHttpRequest, textStatus, errorThrown) { 
-            error = 1;
-        } 
+            $("#movie-list").append(`<li> 
+            <a href="/movie/${response.imdbID}"><h2>${response.Title}</h2></a>
+            <img src=${response.Poster}></img> </li>
+            `);
+        }
     });
+
 }
