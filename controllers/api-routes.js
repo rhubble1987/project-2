@@ -41,11 +41,11 @@ module.exports = function (app) {
     });
 
     app.post("/api/chats", function (req, res) {
-        db.chats.create({
+        db.Chat.create({
             author: null,
             body: req.body.message
-        }).then(function (dbViewParty) {
-            res.json(dbViewParty);
+        }).then(function (dbChat) {
+            res.json(dbChat);
         });
     });
 
