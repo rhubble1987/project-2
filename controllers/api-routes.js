@@ -4,13 +4,14 @@ module.exports = function (app) {
 
 
     app.post("/api/parties", function (req, res) {
-
+        console.log(req.body.viewDay);
+        console.log(req.body.viewTime);
         db.ViewParty.create({
             OMDBId: req.body.OMDBId,
             roomName: req.body.roomName,
             viewerNumber: 0,
-            // viewDay: req.body.viewDay,
-            // viewTime: req.body.viewTime
+            viewDay: req.body.viewDay,
+            viewTime: req.body.viewTime
         }).then(function (dbViewParty) {
             res.json(dbViewParty);
         });
@@ -29,8 +30,8 @@ module.exports = function (app) {
     app.put("/api/parties/:id", function (req, res) {
         db.ViewParty.update({
             viewerNumber: 0,
-            // viewDay: req.body.viewDay,
-            // viewTime: req.body.viewTime
+            viewDay: req.body.viewDay,
+            viewTime: req.body.viewTime
         }, {
             where: {
                 id: req.params.id
