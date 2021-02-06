@@ -1,9 +1,7 @@
 <ul id="messages">
-    {{#each party}}
-        {{#each chatlog}}
-            <li>{{this}}</li>
+        {{#each chats}}
+            <li>{{this.dataValues.body}}</li>
         {{/each}}
-    {{/each}}
 
 </ul>
 <form id="form" action="">
