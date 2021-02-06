@@ -6,6 +6,7 @@ let key = "8e4b0c73";
 for (let i = 0; i < omdbIds.length; i++) {
 
     $.ajax({
+        method:"GET",
         url: "http://www.omdbapi.com/?i=" + omdbIds[i] + "&plot=short&r=json&" + "apikey=" + key,
         success: function (response) {
             $("#movie-list").append(`<li> 
