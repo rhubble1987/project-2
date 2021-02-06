@@ -7,7 +7,7 @@ for (let i = 0; i < omdbIds.length; i++) {
 
     $.ajax({
         method:"GET",
-        url: "http://www.omdbapi.com/?i=" + omdbIds[i] + "&plot=short&r=json&" + "apikey=" + key,
+        url: "https://www.omdbapi.com/?i=" + omdbIds[i] + "&plot=short&r=json&" + "apikey=" + key,
         success: function (response) {
             $("#movie-list").append(`<li> 
             <a href="/movie/${response.imdbID}"><h2>${response.Title}</h2></a>
