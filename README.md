@@ -18,7 +18,7 @@ Run schema.sql in mysql to create database.
 Edit config file in way of choosing to tie database name, username and password of mysql.
 
 ## Usage
-The application is deployed to ---------.
+The application is deployed to https://dry-retreat-28043.herokuapp.com/.
 Server can be run in test usage with node server.js command, or npm run start.
 
 ## Credits
