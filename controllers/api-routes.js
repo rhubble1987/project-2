@@ -9,8 +9,8 @@ app.post("/api/parties", function (req,res) {
         OMDBId: req.body.OMDBId,
         roomName: req.body.roomName,
         viewerNumber: 0,
-        viewDay: req.body.viewDay,
-        viewTime: req.body.viewTime
+        // viewDay: req.body.viewDay,
+        // viewTime: req.body.viewTime
     }).then(function(dbViewParty) {
         res.json(dbViewParty);
     });
@@ -28,9 +28,9 @@ app.delete("/api/parties/:id", function(req,res) {
 
 app.put("/api/parties/:id", function (req,res) {
     db.ViewParty.update({
-        viewerNumber: req.body.viewerNumber,
-        viewDay: req.body.viewDay,
-        viewTime: req.body.viewTime
+        viewerNumber: 0,
+        // viewDay: req.body.viewDay,
+        // viewTime: req.body.viewTime
     }, {
         where: {
             id: req.params.id
