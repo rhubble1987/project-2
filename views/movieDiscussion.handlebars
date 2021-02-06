@@ -52,14 +52,23 @@
 
         <div class="col-2">
             <form>
-                <label for="roomName">Movie Event Name: </label><br>
+                <label for="roomName">Movie Event Name: </label>
+                <br>
                 <input type="text" name="roomName" id="roomName">
-                <label for="viewDay">Viewing Day: </label><br>
+                <br>
+                <br>
+                <label for="viewDay">Viewing Day: </label>
+                <br>
                 <input type="date" name="viewDay" id="viewDay">
-                <label for="viewTime">Viewing Time: </label><br>
+                <br>
+                <br>
+                <label for="viewTime">Viewing Time: </label>
+                <br>
                 <input type="time" name="viewTime" id="viewTime">
+                <br>
+                <br>
             </form>
-            <button id="partyCreate" class="partyCreate">Create Viewing Party</button>
+            <button type="submit" id="partyCreate" class="partyCreate">Create Viewing Party</button>
         </div>
 
         <div class="col col-centered stable-scroll">
@@ -110,6 +119,23 @@
                     location.reload();
                 }
             })
+        });
+
+        $(document).on("keydown", function (event) {
+            if (event.keyCode === 13) {
+                console.log("pressed enter");
+                $.ajax({
+                    url: "/api/parties",
+                    type: "POST",
+                    data: {
+                        OMDBId: omdbId,
+                        roomName: $("#roomName").val().trim()
+                    },
+                    success: () => {
+                        location.reload();
+                    }
+                });
+            }
         });
     });
 </script>
