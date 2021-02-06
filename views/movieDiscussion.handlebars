@@ -36,6 +36,15 @@
 
         </div>
     </div>
+    <div class="col-12">
+        <ul id="party-list">
+
+            {{#each parties}}
+            <a href="/view/{{this.dataValues.id}}">{{this.dataValues.roomName}}</a>
+            {{/each}}
+
+        </ul>
+    </div>
 </div>
 </div>
 <div class="container-fluid">
@@ -98,7 +107,7 @@
                     roomName: $("#roomName").val().trim()
                 },
                 success: () => {
-                    console.log("success");
+                    location.reload();
                 }
             })
         });
