@@ -1,11 +1,19 @@
 body{
     background-image: url("https://images.amcnetworks.com/amc.com/wp-content/uploads/2020/07/mystery-science-theater-key-1920x1080-no-logo.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
+    background-size: contain;
+    background-repeat: repeat;
     font-family: 'Times New Roman', Times, serif;
     color: rgba(255, 255, 255, 0.452); text-shadow: black 0.1em 0.1em 0.2em;
     text-align: center;
 
 }
+
+#movie-list{
+    list-style-type: none;
+    padding:0;
+    margin:0;
+}
    
-  
+#movie-list > li {
+    display: inline-block;
+    }
