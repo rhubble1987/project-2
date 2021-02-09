@@ -1,0 +1,145 @@
+<!--Navigation bar-->
+<nav class="navbar navbar-light bg-light">
+    <!--Name insertion into nav bar-->
+    <div class="text-right"><strong>Movie Talk</strong></div>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent"
+        aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+</nav>
+<div class="container">
+    <div class="fixed-top">
+        <div class="collapse" id="navbarToggleExternalContent">
+            <div class="bg-dark p-3">
+                <h5 class="text-white h4">Navigate</h5>
+                <ul>
+                    <li class="nav-itme">
+                        <a href="index.html">Home</a>
+                    </li>
+                    <li class="nav-itme">
+                        <a href="index.html">My Profile</a>
+                    </li>
+                    <li class="nav-itme">
+                        <a href="index.html">Movies</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-12">
+        <div id="movie-info">
+
+        </div>
+    </div>
+    <div class="col-12">
+        <ul id="party-list">
+
+            {{#each parties}}
+            <a href="/view/{{this.dataValues.id}}">{{this.dataValues.roomName}} - {{this.dataValues.viewDay}} at {{this.dataValues.viewTime}}</a>
+            {{/each}}
+
+        </ul>
+    </div>
+</div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="col-2">
+            <form>
+                <label for="roomName">Movie Event Name: </label>
+                <br>
+                <input type="text" name="roomName" id="roomName">
+                <br>
+                <br>
+                <label for="viewDay">Viewing Day: </label>
+                <br>
+                <input type="date" name="viewDay" id="viewDay">
+                <br>
+                <br>
+                <label for="viewTime">Viewing Time: </label>
+                <br>
+                <input type="time" name="viewTime" id="viewTime">
+                <br>
+                <br>
+            </form>
+            <button type="submit" id="partyCreate" class="partyCreate">Create Viewing Party</button>
+        </div>
+
+        <div class="col col-centered stable-scroll">
+            <ul></ul>
+        </div>
+    </div>
+</div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+    crossorigin="anonymous"></script>
+
+
+<script type="text/javascript">
+    let urlArray = window.location.pathname.split("/");
+    let omdbId = urlArray[urlArray.length - 1];
+
+    let key = "8e4b0c73";
+    $.ajax({
+        method: "GET",
+        url: "https://www.omdbapi.com/?i=" + omdbId + "&plot=short&r=json&" + "apikey=" + key,
+        success: function (response) {
+            console.log(response);
+            $("#movie-info").append(`
+            <a href="/movie/${response.imdbID}"><h2>${response.Title}</h2></a>
+            <img src=${response.Poster}></img>
+            <p>${response.Plot}</p>
+            `);
+        }
+    });
+
+
+
+
+    $(document).ready(function () {
+        $("#partyCreate").on("click", function (event) {
+            console.log("clicked the create viewing party button");
+            $.ajax({
+                url: "/api/parties",
+                type: "POST",
+                data: {
+                    OMDBId: omdbId,
+                    roomName: $("#roomName").val().trim(),
+                    viewDay: moment($("#viewDay").val()).format("M/D/YYYY"),
+                    viewTime: moment($("#viewTime").val(),"HH:mm").format("h:mm A"),
+                },
+                success: () => {
+                    location.reload();
+                }
+            })
+        });
+
+        $(document).on("keydown", function (event) {
+            if (event.keyCode === 13) {
+                console.log("pressed enter");
+                $.ajax({
+                    url: "/api/parties",
+                    type: "POST",
+                    data: {
+                        OMDBId: omdbId,
+                        roomName: $("#roomName").val().trim(),
+                        viewDay: moment($("#viewDay").val()).format("M/D/YYYY"),
+                        viewTime: moment($("#viewTime").val(),"HH:mm").format("h:mm A"),
+                    },
+                    success: () => {
+                        location.reload();
+                    }
+                });
+            }
+        });
+    });
+</script>
