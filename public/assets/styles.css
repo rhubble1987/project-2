@@ -3,6 +3,7 @@ body{
     background-size: cover;
  background-repeat: no-repeat;
  font-family: 'Times New Roman', Times, serif;
+ color: rgba(255, 255, 255, 0.452); text-shadow: black 0.1em 0.1em 0.2em
    }
-   p.inset {border-style: inset;}
+   
   
