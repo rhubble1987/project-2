@@ -1,5 +1,5 @@
 <!--Navigation bar-->
-<nav class="navbar navbar-light bg-light">
+<nav class="navbar navbar-dark bg-dark">
     <!--Name insertion into nav bar-->
     <div class="text-right"><strong>Movie Talk</strong></div>
 
@@ -15,13 +15,13 @@
             <div class="bg-dark p-3">
                 <h5 class="text-white h4">Navigate</h5>
                 <ul>
-                    <li class="nav-itme">
+                    <li class="nav-item">
                         <a href="index.html">Home</a>
                     </li>
-                    <li class="nav-itme">
+                    <li class="nav-item">
                         <a href="index.html">My Profile</a>
                     </li>
-                    <li class="nav-itme">
+                    <li class="nav-item">
                         <a href="index.html">Movies</a>
                     </li>
                 </ul>
@@ -40,7 +40,7 @@
         <ul id="party-list">
 
             {{#each parties}}
-            <a href="/view/{{this.dataValues.id}}">{{this.dataValues.roomName}} - {{this.dataValues.viewDay}} at {{this.dataValues.viewTime}}</a>
+            <a href="/view/{{this.dataValues.id}}">{{this.dataValues.roomName}} - {{this.dataValues.viewDay}} at {{this.dataValues.viewTime}}</a><br>
             {{/each}}
 
         </ul>
@@ -50,7 +50,8 @@
 <div class="container-fluid">
     <div class="row">
 
-        <div class="col-2">
+        <div class="col">
+            <h2>Create a MovieChat Event</h2>
             <form>
                 <label for="roomName">Movie Event Name: </label>
                 <br>
@@ -69,10 +70,6 @@
                 <br>
             </form>
             <button type="submit" id="partyCreate" class="partyCreate">Create Viewing Party</button>
-        </div>
-
-        <div class="col col-centered stable-scroll">
-            <ul></ul>
         </div>
     </div>
 </div>
