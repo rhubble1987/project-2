@@ -9,11 +9,10 @@ for (let i = 0; i < omdbIds.length; i++) {
         method:"GET",
         url: "https://www.omdbapi.com/?i=" + omdbIds[i] + "&plot=short&r=json&" + "apikey=" + key,
         success: function (response) {
-            $("#movie-list").append(`<li style="display:inline;"> 
+            $("#movie-list").append(`<div class="col-6"> 
             <a href="/movie/${response.imdbID}"><h2>${response.Title}</h2></a>
-            <img src=${response.Poster}></img> </li>
-            <hr />
-            `);
+            <img src=${response.Poster}></img> </div>
+            <hr>`);
         }
     });
 
